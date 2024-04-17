@@ -64,3 +64,12 @@ func ArchiveCRDs(fs billy.Filesystem, srcHelmChartPath, srcCRDsDir, dstHelmChart
 	logrus.Infof("Compressing CRDs from %s to %s", srcCRDsDirPath, dstFilePath)
 	return filesystem.ArchiveDir(fs, srcCRDsDirPath, dstFilePath)
 }
+
+func UnarchiveCrds(fs billy.Filesystem, crdsArchivePath, crdsDestPath string) error {
+	err := filesystem.UnarchiveTgz(fs, crdsArchivePath, "", crdsDestPath, false)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
